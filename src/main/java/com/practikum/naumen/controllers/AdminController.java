@@ -333,4 +333,25 @@ public class AdminController {
         accountRepository.delete(post);
         return "redirect:/admin-account";
     }
+
+    @GetMapping("/registration")
+    public String Registration(Model model) {
+        model.addAttribute("userForm", new Account());
+        return "homeHTML/registration";
+    }
+
+
+    @PostMapping("/registration")
+    public String addAccounte(@ModelAttribute("userForm") @Valid Account userForm, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "homeHTML/registration";
+        }
+        if (!userService.saveUser(userForm)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "homeHTML/registration";
+        }
+
+        return "redirect:/";
+    }
 }

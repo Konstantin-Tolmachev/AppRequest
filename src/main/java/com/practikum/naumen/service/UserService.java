@@ -1,6 +1,7 @@
 package com.practikum.naumen.service;
 
 import com.practikum.naumen.models.Account;
+import com.practikum.naumen.models.Role;
 import com.practikum.naumen.repo.AccountRepository;
 import com.practikum.naumen.repo.RoleRepository;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +33,11 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         Account account = accountRepository.findByUsername(username);
+        if (account == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
         return account;
     }
 
@@ -44,14 +50,28 @@ public class UserService implements UserDetailsService {
         return accountRepository.findAllByOrderByIdDesc();
     }
 
+//    public boolean saveUser(Account account) {
+//        Account userFromDB = accountRepository.findByUsername(account.getUsername());
+//        if (userFromDB != null) {
+//            return false;
+//        }
+//        account.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
+//        account.setPassword(PasswordEncoder.encode(account.getPassword()));
+//        accountRepository.save(account);
+//        return true;
+//    }
+
     public boolean saveUser(Account account) {
         Account userFromDB = accountRepository.findByUsername(account.getUsername());
         if (userFromDB != null) {
             return false;
         }
-        account.setPassword(PasswordEncoder.encode(account.getPassword()));
+        account.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN","Администратор")));
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
         accountRepository.save(account);
         return true;
     }
+
+
 }
 
