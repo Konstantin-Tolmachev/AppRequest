@@ -337,6 +337,8 @@ public class AdminController {
     @GetMapping("/registration")
     public String Registration(Model model) {
         model.addAttribute("userForm", new Account());
+        model.addAttribute("listRoles", roleRepository.findAll());
+        model.addAttribute("allUsers", userService.allAccounts());
         return "homeHTML/registration";
     }
 
