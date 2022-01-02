@@ -12,12 +12,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    @Autowired
+//    EntityManager manager;
+
     @Autowired
     UserService userService;
+
+//    @Bean
+//    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+//        return entityManagerFactory.createEntityManager();
+//    }
 
     /* Шифрование пароля при создании учетной записи */
     @Bean
@@ -37,6 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/","/registration").permitAll()
+//                antMatchers("/","/registration",
+//                        "/staff-request/","/staff-request/**","/staff-status","/staff-filter-request",
+//                        "/admin","/admin/**","/admin-request","/admin-status","/admin-account").permitAll()
                 .antMatchers("/staff-request/","/staff-request/**","/staff-status","/staff-filter-request").hasRole("STAFF")
                 .antMatchers("/admin","/admin/**","/admin-request","/admin-status","/admin-account","/filter-staff","/filter-request","/filter-request-from-whom").hasRole("ADMIN")
                 .anyRequest()
