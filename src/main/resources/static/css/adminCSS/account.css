@@ -239,6 +239,7 @@ input#username, #password, #roles{
     background: url(https://snipp.ru/demo/495/view.svg) 0 0 no-repeat;
 }
 
+
 /*Глазик*/
 .password-control.view {
     background: url(https://snipp.ru/demo/495/no-view.svg) 0 0 no-repeat;

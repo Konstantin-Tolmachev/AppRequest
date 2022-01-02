@@ -341,17 +341,34 @@ public class AdminController {
     }
 
 
+//    @PostMapping("/registration")
+//    public String addAccounte(@ModelAttribute("userForm") @Valid Account userForm, BindingResult bindingResult, Model model) {
+//
+//        if (bindingResult.hasErrors()) {
+//            return "homeHTML/registration";
+//        }
+//        if (!userService.saveUser(userForm)){
+//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+//            return "homeHTML/registration";
+//        }
+//
+//        return "redirect:/";
+//    }
+
     @PostMapping("/registration")
-    public String addAccounte(@ModelAttribute("userForm") @Valid Account userForm, BindingResult bindingResult, Model model) {
+    public String addRegistration(@ModelAttribute("userForm") @Valid Account userForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("listRoles", roleRepository.findAll());
+            model.addAttribute("allUsers", userService.allAccounts());
             return "homeHTML/registration";
         }
         if (!userService.saveUser(userForm)){
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            model.addAttribute("usernameError", "Аккаунт с таким логином уже существует");
+            model.addAttribute("listRoles", roleRepository.findAll());
+            model.addAttribute("allUsers", userService.allAccounts());
             return "homeHTML/registration";
         }
-
         return "redirect:/";
     }
 }
