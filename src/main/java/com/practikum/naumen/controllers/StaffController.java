@@ -39,7 +39,7 @@ public class StaffController {
         model.addAttribute("requests", requests);
         Collection<Staff> staffs = staffRepository.findAllByOrderByIdDesc();
         model.addAttribute("positions", extractPositions(staffs));
-        return "StaffHTML/request";
+        return "staffHTML/request";
     }
 
     /*----------- Добавить новую заявку -----------*/

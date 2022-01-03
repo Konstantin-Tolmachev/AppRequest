@@ -125,7 +125,7 @@ public class AdminController {
         model.addAttribute("positions", extractPositions(staffs));
         Iterable<Request> requests = requestRepository.findAllByOrderByIdDesc();
         model.addAttribute("requests", requests);
-        return "AdminHTML/request";
+        return "adminHTML/request";
     }
 
     /*----------- Добавить новую заявку -----------*/
