@@ -371,13 +371,13 @@ public class AdminController {
             model.addAttribute("allUsers", userService.allAccounts());
             return "homeHTML/registration";
         }
-        return "redirect:/";
+        return "redirect:/registration";
     }
 
     @PostMapping("/registration/{id}/remove")
-    public String registrationDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
-        Role post = roleRepository.findById(id).orElseThrow(Exception::new);
-        roleRepository.delete(post);
+    public String registrationAccountDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
+        Account post = accountRepository.findById(id).orElseThrow(Exception::new);
+        accountRepository.delete(post);
         return "redirect:/registration";
     }
 
