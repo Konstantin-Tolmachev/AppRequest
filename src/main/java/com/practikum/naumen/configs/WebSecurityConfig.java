@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
     }
 
+
     /* Шифрование пароля при создании учетной записи */
 
 
