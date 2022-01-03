@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--    <link rel="stylesheet" href="/css/registration.css"/>-->
+    <link rel="stylesheet" href="/css/adminCSS/account.css"/>
+    <title th:text="${'title'}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://unpkg.com/imask"></script>
+
+
+</head>
+<body>
+
+<section class="addNewStaff">
+    <h1 >Добавить роль</h1>
+
+    <div class="allDivName">
+        <div class="staffsName">id</div>
+        <div class="staffsName">name</div>
+        <div class="staffsName">rusName</div>
+    </div>
+
+    <form  th:action="@{/registrationn}" method="post">
+        <div class="allDivName">
+                <div><input type="text"   name="id" placeholder="id"></div>
+                <div><input type="text"   name="name" placeholder="name"></div>
+                <div><input type="text"   name="rusName" placeholder="rusName"></div>
+            </div>
+        </div>
+        <button class="btnStaff" id="btnAddNewStaff"  type="submit">Добавить</button>
+    </form>
+
+</section>
+
+<section >
+    <div class="StaffsFilter">
+        <h1>Роли</h1>
+
+
+        <div th:each="el : ${roles}" class="request">
+            <div class="allDiv">
+                <div class="c1">
+                    <div class="staffReq1">id</div>
+                    <div class="staffReq1">name</div>
+                    <div class="staffReq1">rusName</div>
+                </div>
+
+                <div class="c1" >
+                    <div th:text="${el.id}" class="staffReq"><input type="text" id="id" name="id" ></div>
+                    <div th:text="${el.name}" class="staffReq"><input type="text" id="name" name="name" ></div>
+                    <div th:text="${el.rusName}" class="staffReq"><input type="text" id="rusName" name="rusName" ></div>
+
+                </div>
+
+                <div >
+                    <div class="btnEdit"><a th:href="'/registrationn/' + ${el.id} + '/edit'">Редактировать</a></div>
+                    <form  th:action="'/registrationn/' + ${el.id} +'/remove'" method="post">
+                        <button class="btnDelete" type="submit">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--<section class="addNewAccount">-->
+<!--    <h1 >Добавить аккаунт</h1>-->
+
+<!--    <div class="inputAccount">-->
+<!--        <div class="inputAccountName">Логин</div>-->
+<!--        <div class="inputAccountName">Пароль</div>-->
+<!--        <div class="inputAccountName">Роль</div>-->
+<!--    </div>-->
+
+<!--    <form th:action="@{/registration}" th:object="${userForm}" method="post">-->
+<!--        <input type="hidden" th:field="*{id}" th:value="${userForm.id}">-->
+<!--        <div class="inputAccount">-->
+<!--            <div>-->
+<!--                <input  onkeyup="checkParamsAddAccount()" id="username" th:field="*{username}" placeholder="Логин*">-->
+<!--                <p th:if="${#fields.hasErrors('username')} "-->
+<!--                   th:class="${#fields.hasErrors('username')}? error">Минимальное значение 3 символа</p>-->
+<!--                <p th:text="${usernameError}"  class="error"></p>-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <input type="password" onkeyup="checkParamsAddAccount()" id="password" th:field="*{password}" placeholder="Пароль*">-->
+<!--                <a href="#" class="password-control" onclick="return show_hide_account_password(this);"></a>-->
+<!--                <p th:if="${#fields.hasErrors('password')}"-->
+<!--                   th:class="${#fields.hasErrors('password')}? error">Минимальное значение 3 символа</p>-->
+<!--            </div>-->
+
+<!--            <input list="characterRoles"  th:field="*{roles}" onkeyup="checkParamsAddAccount()" id="roles" min="1" max="2" size="1"  placeholder="Права доступа*">-->
+<!--            <datalist id="characterRoles" >-->
+<!--                <option th:each="role : ${listRoles}"-->
+<!--                        th:utext="${role.rusName}"-->
+<!--                        th:value="${role.id}">-->
+<!--                </option>-->
+<!--            </datalist>-->
+<!--        </div>-->
+<!--        <button class="btnAddAccount" id="btnAddAccount" disabled type="submit">Добавить</button>-->
+<!--    </form>-->
+<!--</section>-->
+
+
+<!--<section class="allAccount">-->
+<!--    <h1 >Список аккаунтов</h1>-->
+
+<!--    <div class="inputAccount">-->
+<!--        <div class="inputAccountName">Логин</div>-->
+<!--        <div class="inputAccountName">Пароль</div>-->
+<!--        <div class="inputAccountName">Роль</div>-->
+<!--    </div>-->
+
+<!--    <div th:each="el : ${allUsers}"   class="accounts" >-->
+<!--        <div class="inputAccount" >-->
+<!--            <div th:text="${el.username}"></div>-->
+<!--            <div th:text="${el.password}"></div>-->
+<!--            <div th:each="role : ${el.roles}" th:text="${role.rusName}"></div>-->
+
+<!--        </div>-->
+
+<!--        <form  th:action="'/registration/' + ${el.id} +'/remove'" method="post">-->
+<!--            <button class="btnDelete" type="submit">Удалить</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<section  class="booking">-->
+<!--    <h3 >Регистрация</h3>-->
+<!--    &lt;!&ndash;action="/Registration" th:action="@{/Registration}" &ndash;&gt;-->
+<!--    <form th:action="@{/registration}" method="post">-->
+<!--        <div class="allDiv">-->
+<!--            <div class="wrap"><input type="text" onkeyup="checkParams()" id="username" name="username" placeholder="Логин"></div>-->
+<!--            <div class="wrap"><input type="password" onkeyup="checkParams()" id="password" name="password" placeholder="Пароль"></div>-->
+<!--            &lt;!&ndash; <div class="wrap"><input type="password" onkeyup="checkParams()" id="passwordConfirm" name="passwordConfirm" placeholder="Подтвердите пароль"></div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="btn">-->
+<!--            <input type="submit" id="submit" class="glow-button" value="Зарегистрироваться">-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</section>-->
+
+
+
+
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
+<!--<script src="/js/allScripts.js"></script>-->
+
+</body>
+
+<!-- <footer th:insert="blocks/footer :: footer"></footer> -->
+
+
+</html>

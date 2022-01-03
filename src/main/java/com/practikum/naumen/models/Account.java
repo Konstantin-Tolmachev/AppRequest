@@ -1,6 +1,8 @@
 package com.practikum.naumen.models;
 
 import com.practikum.naumen.controllers.AdminController;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,9 +11,12 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
+import static org.hibernate.annotations.NotFoundAction.IGNORE;
+
 @Entity
 @Table(name = "t_user")
 public class Account extends AdminController implements UserDetails {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +26,12 @@ public class Account extends AdminController implements UserDetails {
     @Size(min=3)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
+    @Column(nullable = false, unique = true)
     private Set<Role> roles;
+
+//    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Role.class)
+//    @JoinColumn(name = "id", insertable = false, updatable = false)
+//    private Set<Role> roles;
 
     public Account() {
     }

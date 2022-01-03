@@ -373,4 +373,64 @@ public class AdminController {
         }
         return "redirect:/";
     }
+
+    @PostMapping("/registration/{id}/remove")
+    public String registrationDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
+        Role post = roleRepository.findById(id).orElseThrow(Exception::new);
+        roleRepository.delete(post);
+        return "redirect:/registration";
+    }
+
+
+
+
+    /*-----------  -----------*/
+
+    @GetMapping("/registrationn")
+    public String registrationnn( Model model) {
+        Collection<Role> roles = roleRepository.findAll();
+        model.addAttribute("roles", roles);
+        model.addAttribute("title", "registrationn");
+        return "homeHTML/registrationn";
+    }
+
+    /*-----------  -----------*/
+
+
+    /*-----------  -----------*/
+
+//    @PostMapping("/registrationn")
+//    public String addRegistrationn(@RequestParam String id,
+//                                @RequestParam String name,
+//                                @RequestParam String rusName,
+//                            Model model) {
+//        Role post = new Role (id, name, rusName);
+//        roleRepository.save(post);
+//        return "redirect:/registrationn";
+//    }
+
+    @PostMapping("/registrationn")
+    public String addregistrationn(  @RequestParam long id,
+                                    @RequestParam String name,
+                                    @RequestParam String rusName,
+                                    Model model) {
+        Role post;
+
+        if  (Objects.equals(id,"" )) {
+            post = new Role ("3", name, rusName);
+        }else {
+            post = new Role (id, name, rusName);        }
+//        model.addAttribute("requests", requestRepository.findAllByOrderByIdDesc());
+        roleRepository.save(post);
+        return "redirect:/registrationn";
+    }
+
+    /*-----------  -----------*/
+
+    @PostMapping("/registrationn/{id}/remove")
+    public String registrationnDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
+        Role post = roleRepository.findById(id).orElseThrow(Exception::new);
+        roleRepository.delete(post);
+        return "redirect:/registrationn";
+    }
 }

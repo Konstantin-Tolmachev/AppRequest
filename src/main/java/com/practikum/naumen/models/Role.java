@@ -1,21 +1,34 @@
 package com.practikum.naumen.models;
 
+import org.hibernate.annotations.NotFound;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Set;
+
+import static org.hibernate.annotations.NotFoundAction.IGNORE;
 
 @Entity
 @Table(name = "t_role")
 
 public class Role implements GrantedAuthority {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id", unique = true, nullable = false)
+
+    @Column(nullable = false, unique = true)
     private Long id;
     private String name;
     private String rusName;
     @Transient
     @ManyToMany(mappedBy = "roles")
+    @JoinColumn(name="roles_id") //!!!!!!
+//    @NotFound(action = IGNORE)
+
+//    @Column(nullable = false, unique = true)
     private Set<Account> accounts;
+
+
 
     public Role() {
     }
@@ -28,6 +41,12 @@ public class Role implements GrantedAuthority {
         this.id = id;
         this.name = name;
         this.rusName = rusName;
+    }
+
+    public Role(String name, String rusName) {
+    }
+
+    public Role(String id, String name, String rusName) {
     }
 
 //    public Role(long l, String role_admin) {
