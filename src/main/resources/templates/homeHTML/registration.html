@@ -51,6 +51,30 @@
     </form>
 </section>
 
+
+<section class="allAccount">
+    <h1 >Список аккаунтов</h1>
+
+    <div class="inputAccount">
+        <div class="inputAccountName">Логин</div>
+        <div class="inputAccountName">Пароль</div>
+        <div class="inputAccountName">Роль</div>
+    </div>
+
+    <div th:each="el : ${allUsers}"   class="accounts" >
+        <div class="inputAccount" >
+            <div th:text="${el.username}"></div>
+            <div th:text="${el.password}"></div>
+            <div th:each="role : ${el.roles}" th:text="${role.rusName}"></div>
+
+        </div>
+
+        <form  th:action="'/registration/' + ${el.id} +'/remove'" method="post">
+            <button class="btnDelete" type="submit">Удалить</button>
+        </form>
+    </div>
+</section>
+
 <!--<section  class="booking">-->
 <!--    <h3 >Регистрация</h3>-->
 <!--    &lt;!&ndash;action="/Registration" th:action="@{/Registration}" &ndash;&gt;-->
