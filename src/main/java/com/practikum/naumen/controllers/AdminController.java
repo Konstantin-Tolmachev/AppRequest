@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -140,9 +142,11 @@ public class AdminController {
         Request request;
 
         if  (Objects.equals(room, "")) {
-            request = new Request (level, "Не указано",fromWhom, text, toWhom,"Не выполнено","-", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
+//            request = new Request (level, "Не указано",fromWhom, text, toWhom,"Не выполнено","-", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
+            request = new Request (level, "Не указано",fromWhom, text, toWhom,"Не выполнено","-", ZonedDateTime.now(ZoneId.of("Asia/Yekaterinburg")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
         }else {
-            request = new Request(level, room, fromWhom, text, toWhom, "Не выполнено", "-", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
+//            request = new Request(level, room, fromWhom, text, toWhom, "Не выполнено", "-", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
+            request = new Request(level, room, fromWhom, text, toWhom, "Не выполнено", "-", ZonedDateTime.now(ZoneId.of("Asia/Yekaterinburg")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
         }
         model.addAttribute("requests", requestRepository.findAllByOrderByIdDesc());
         requestRepository.save(request);
