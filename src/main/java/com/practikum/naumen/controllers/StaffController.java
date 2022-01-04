@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,9 +55,9 @@ public class StaffController {
                                   Model model) {
         Request request;
         if  (Objects.equals(room, "")) {
-            request = new Request (level, "Не указано",fromWhom, text, toWhom,"Не выполнено","-", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
+            request = new Request (level, "Не указано",fromWhom, text, toWhom,"Не выполнено","-", ZonedDateTime.now(ZoneId.of("Asia/Yekaterinburg")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
         }else {
-            request = new Request(level, room, fromWhom, text, toWhom, "Не выполнено","-", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
+            request = new Request(level, room, fromWhom, text, toWhom, "Не выполнено","-", ZonedDateTime.now(ZoneId.of("Asia/Yekaterinburg")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), "-", "-");
         }
         model.addAttribute("requests", requestRepository.findAllByOrderByIdDesc());
         requestRepository.save(request);
@@ -105,7 +107,7 @@ public class StaffController {
             post.setComment(comment);
         }else {
             post.setComment("Комментариев не оставлено");}
-        post.setEndDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        post.setEndDate(ZonedDateTime.now(ZoneId.of("Asia/Yekaterinburg")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         requestRepository.save(post);
         return "redirect:/staff-request";
     }
