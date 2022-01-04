@@ -17,7 +17,6 @@ import static org.hibernate.annotations.NotFoundAction.IGNORE;
 @Table(name = "t_user")
 public class Account extends AdminController implements UserDetails {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,10 +27,6 @@ public class Account extends AdminController implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @Column(nullable = false, unique = true)
     private Set<Role> roles;
-
-//    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Role.class)
-//    @JoinColumn(name = "id", insertable = false, updatable = false)
-//    private Set<Role> roles;
 
     public Account() {
     }

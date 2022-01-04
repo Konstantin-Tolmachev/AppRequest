@@ -48,10 +48,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/registration","/registration/**","/registrationn/**").permitAll()
+                .antMatchers("/").permitAll()
 
-                .antMatchers("/staff-request/","/staff-request/**","/staff-status","/staff-filter-request").hasRole("STAFF")
-                .antMatchers("/admin","/admin/**","/admin-request","/admin-request/**","/admin-status","/admin-account","/filter-staff","/filter-request","/filter-request-from-whom").hasRole("ADMIN")
+                .antMatchers("/staff-request/","/staff-request/**","/staff-status",
+                                        "/staff-filter-request").hasRole("STAFF")
+                .antMatchers("/admin","/admin/**","/admin-request","/admin-request/**","/admin-status",
+                                        "/admin-account","/filter-staff","/filter-request","/filter-request-from-whom",
+                                        "/admin-add-roles").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -65,9 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
     }
 
-
     /* Шифрование пароля при создании учетной записи */
-
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

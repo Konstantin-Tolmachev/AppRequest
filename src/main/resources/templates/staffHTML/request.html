@@ -129,9 +129,11 @@
                         <textarea type="text" id="Ctext" name="comment"></textarea>
                     </div>
                 </div>
+                <div th:if="${el.status != 'Выполнено' }">
                     <div class="btnEdit">
-                        <a th:href="'/staff-request/' + ${el.id} + '/reply'">Ответить на заявку</a>
+                         <a th:href="'/staff-request/' + ${el.id} + '/reply'">Ответить на заявку</a>
                     </div>
+                </div>
             </div>
         </div>
     </div>

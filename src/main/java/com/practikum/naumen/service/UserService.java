@@ -1,7 +1,6 @@
 package com.practikum.naumen.service;
 
 import com.practikum.naumen.models.Account;
-import com.practikum.naumen.models.Role;
 import com.practikum.naumen.repo.AccountRepository;
 import com.practikum.naumen.repo.RoleRepository;
 
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,16 +69,5 @@ public class UserService implements UserDetailsService {
         accountRepository.save(account);
         return true;
     }
-//
-//    @Transactional
-//    public void insertWithQuery(Role role) {
-//        EntityManager entityManager = null;
-//        entityManager.createNativeQuery("INSERT INTO Role (id, name, rusName) VALUES (?,?,?)")
-//                .setParameter(3, role.getId())
-//                .setParameter('e', role.getName())
-//                .setParameter('e', role.getRusName())
-//                .executeUpdate();
-//    }
-
 }
 

@@ -334,103 +334,39 @@ public class AdminController {
         return "redirect:/admin-account";
     }
 
-    @GetMapping("/registration")
-    public String Registration(Model model) {
-        model.addAttribute("userForm", new Account());
-        model.addAttribute("listRoles", roleRepository.findAll());
-        model.addAttribute("allUsers", userService.allAccounts());
-        return "homeHTML/registration";
-    }
+    /*----------- Вывод доступных ролей -----------*/
 
-
-//    @PostMapping("/registration")
-//    public String addAccounte(@ModelAttribute("userForm") @Valid Account userForm, BindingResult bindingResult, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return "homeHTML/registration";
-//        }
-//        if (!userService.saveUser(userForm)){
-//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-//            return "homeHTML/registration";
-//        }
-//
-//        return "redirect:/";
-//    }
-
-    @PostMapping("/registration")
-    public String addRegistration(@ModelAttribute("userForm") @Valid Account userForm, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("listRoles", roleRepository.findAll());
-            model.addAttribute("allUsers", userService.allAccounts());
-            return "homeHTML/registration";
-        }
-        if (!userService.saveUser(userForm)){
-            model.addAttribute("usernameError", "Аккаунт с таким логином уже существует");
-            model.addAttribute("listRoles", roleRepository.findAll());
-            model.addAttribute("allUsers", userService.allAccounts());
-            return "homeHTML/registration";
-        }
-        return "redirect:/registration";
-    }
-
-    @PostMapping("/registration/{id}/remove")
-    public String registrationAccountDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
-        Account post = accountRepository.findById(id).orElseThrow(Exception::new);
-        accountRepository.delete(post);
-        return "redirect:/registration";
-    }
-
-
-
-
-    /*-----------  -----------*/
-
-    @GetMapping("/registrationn")
-    public String registrationnn( Model model) {
+    @GetMapping("/admin-add-roles")
+    public String adminRoles( Model model) {
         Collection<Role> roles = roleRepository.findAll();
         model.addAttribute("roles", roles);
         model.addAttribute("title", "registrationn");
-        return "homeHTML/registrationn";
+        return "adminHTML/addRoles";
     }
 
-    /*-----------  -----------*/
+    /*----------- Добавить новую роль -----------*/
 
-
-    /*-----------  -----------*/
-
-//    @PostMapping("/registrationn")
-//    public String addRegistrationn(@RequestParam String id,
-//                                @RequestParam String name,
-//                                @RequestParam String rusName,
-//                            Model model) {
-//        Role post = new Role (id, name, rusName);
-//        roleRepository.save(post);
-//        return "redirect:/registrationn";
-//    }
-
-    @PostMapping("/registrationn")
-    public String addregistrationn(  @RequestParam long id,
-                                    @RequestParam String name,
-                                    @RequestParam String rusName,
-                                    Model model) {
+    @PostMapping("/admin-add-roles")
+    public String adminAddRoles(  @RequestParam long id,
+                                  @RequestParam String name,
+                                  @RequestParam String rusName,
+                                  Model model) {
         Role post;
 
         if  (Objects.equals(id,"" )) {
             post = new Role ("3", name, rusName);
         }else {
             post = new Role (id, name, rusName);        }
-//        model.addAttribute("requests", requestRepository.findAllByOrderByIdDesc());
         roleRepository.save(post);
-        return "redirect:/registrationn";
+        return "redirect:/admin-add-roles";
     }
 
-    /*-----------  -----------*/
+    /*----------- Удалить роль -----------*/
 
-    @PostMapping("/registrationn/{id}/remove")
-    public String registrationnDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
+    @PostMapping("/admin-add-roles/{id}/remove")
+    public String adminRolesDelete(@PathVariable(value = "id") long id, Model model) throws Exception {
         Role post = roleRepository.findById(id).orElseThrow(Exception::new);
         roleRepository.delete(post);
-        return "redirect:/registrationn";
+        return "redirect:/admin-add-roles";
     }
 }
