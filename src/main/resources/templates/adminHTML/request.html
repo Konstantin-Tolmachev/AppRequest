@@ -150,8 +150,10 @@
 
                 <div >
                     <div class="btnEdit"><a th:href="'/admin-request/' + ${el.id} + '/edit'">Редактировать</a></div>
-                    <div th:if="${el.toWhom == #authentication.name}">
+                        <div th:if="${el.toWhom == #authentication.name}">
+                        <div th:if="${el.status != 'Выполнено' }">
                     <div class="btnEdit"><a th:href="'/admin-request/' + ${el.id} + '/reply'">Ответить</a></div>
+                        </div>
                     </div>
                     <form th:action="'/admin-request/' + ${el.id} +'/remove'" method="post">
                         <button class="btnDelete" type="submit">Удалить</button>
