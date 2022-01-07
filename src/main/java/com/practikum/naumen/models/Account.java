@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
-import static org.hibernate.annotations.NotFoundAction.IGNORE;
 
 @Entity
 @Table(name = "t_user")
