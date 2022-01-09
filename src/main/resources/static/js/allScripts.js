@@ -161,6 +161,8 @@ function validator(evt) {
     }
 }
 
+/* Подтверждение для удаления */
+
 function myFunction() {
     var txt;
     if (confirm("Want to delete!")) {
