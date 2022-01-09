@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <form th:action="'/admin-request/' + ${el.id} +'/remove'" method="post">
-                        <button class="btnDelete" type="submit">Удалить</button>
+                        <button class="btnDelete" onclick="return confirm('Удалить?')" type="submit">Удалить</button>
                     </form>
                 </div>
               </div>

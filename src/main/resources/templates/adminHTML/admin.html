@@ -84,7 +84,9 @@
                 <div >
                     <div class="btnEdit"><a th:href="'/admin/' + ${el.id} + '/edit'">Редактировать</a></div>
                     <form  th:action="'/admin/' + ${el.id} +'/remove'" method="post">
-                        <button class="btnDelete" type="submit">Удалить</button>
+                        <button class="btnDelete" onclick="return confirm('Удалить?')" type="submit">Удалить</button>
+<!--                        <a href="/admin" onclick="return confirm('Are you sure?')">Delete</a>-->
+
                     </form>
                 </div>
             </div>

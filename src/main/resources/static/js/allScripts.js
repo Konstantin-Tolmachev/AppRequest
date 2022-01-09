@@ -160,3 +160,15 @@ function validator(evt) {
         if(theEvent.preventDefault) theEvent.preventDefault();
     }
 }
+
+function myFunction() {
+    var txt;
+    if (confirm("Want to delete!")) {
+        txt = "Deleted!";
+        // Do the delete when you click ok
+    } else {
+        txt = "Cancel!";
+        // If you click cancel, remove the alert box
+    }
+    console.log(txt);
+}
