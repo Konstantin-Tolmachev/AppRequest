@@ -65,7 +65,7 @@
         </div>
 
         <form  th:action="'/admin-account/' + ${el.id} +'/remove'" method="post">
-            <div th:if="${el.username != #authentication.name}">
+            <div th:if="${el.username != #authentication.name && el.username != 'Администратор'}">
                 <button class="btnDelete" onclick="return confirm('Удалить?')" type="submit">Удалить</button>
             </div>
         </form>

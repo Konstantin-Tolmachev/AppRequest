@@ -18,10 +18,7 @@ body {
     right: -10px;
     bottom: -10px;
     filter: blur(1px);
-    /*background: url(/img/fone.png) no-repeat center;*/
-
-      /*background: url(http://files.all-free-download.com//downloadfiles/wallpapers/1920_1080/tropical_beach_paradise_5k_17484.jpg) no-repeat center;*/
-      background: url(https://image.freepik.com/free-vector/leaves-background-with-metallic-foil_79603-956.jpg) no-repeat center;
+     background: url(https://image.freepik.com/free-vector/leaves-background-with-metallic-foil_79603-956.jpg) no-repeat center;
       background-size: cover;
 }
 
