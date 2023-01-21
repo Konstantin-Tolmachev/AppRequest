@@ -21,6 +21,23 @@ public class Role implements GrantedAuthority {
     @JoinColumn(name="roles_id") // Добавлено
     private Set<Account> accounts;
 
+//    @Transient //
+//    @ManyToMany(mappedBy = "roles") //
+//    @JoinColumn(name="staff_id") // Добавлено
+//    private Set<Staff> staffs;
+
+    //@GetMapping
+    //public String myControllerMethod(Model model) {
+    //  ...
+    //  model.addAttribute("totalCurrentMoth", calculateTotalOfCurrentMonth());
+    //
+    //  return "overview"; // change to what your view is actually called
+    //}
+    //И замените свой код HTML на:
+    //
+    //<div th:text="${totalCurrentMonth}"></div>
+
+
     public Role() {
     }
 

@@ -97,6 +97,14 @@ body {
     position: relative;
 }
 
+/*Вывод аккаунтов*/
+.inputAccountShow{
+    column-count: 2;
+    text-align: center;
+    padding-bottom: 1%;
+    position: relative;
+}
+
 /*Размер шрифта*/
 .addNewStaff> .inputAccount > .staffsName {
     font-size: 1.3rem;
@@ -173,7 +181,8 @@ body {
     margin-bottom: 3%;
     border-radius: 5px;
     background-color: white;
-    height: 900px;
+    min-height: 200px;
+    max-height: 900px;
     overflow: scroll;
     overflow-x: hidden;
 }

@@ -44,6 +44,7 @@ public class AdminController {
         Collection<Staff> staffs = staffRepository.findAllByOrderByIdDesc();
         model.addAttribute("positions", extractPositions(staffs));
         model.addAttribute("staffs", staffs);
+
         model.addAttribute("title", "Администратор");
         return "adminHTML/admin";
     }

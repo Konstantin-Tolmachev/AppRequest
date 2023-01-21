@@ -35,31 +35,57 @@
                        th:class="${#fields.hasErrors('password')}? error">Минимальное значение 3 символа</p>
                 </div>
 
-                <input list="characterRoles"  th:field="*{roles}" onkeyup="checkParamsAddAccount()" id="roles" min="1" max="2" size="1"  placeholder="Права доступа*">
+
+                <input list="characterRoles"   th:field="*{roles}" onkeyup="checkParamsAddAccount()" id="roles" min="1" max="2" size="1"  placeholder="Права доступа*">
                 <datalist id="characterRoles" >
                     <option th:each="role : ${listRoles}"
-                            th:utext="${role.rusName}"
-                            th:value="${role.id}">
+                            th:value="${role.id}"
+                            th:utext="${role.rusName}">
+<!--                            th:attr="data-rusName=${role.rusName}, data-id=${role.id}">-->
                     </option>
                 </datalist>
+                <!--                   th:text="${role.rusName}+' '+${role.id}"         th:utext="${role.rusName}"-->
             </div>
         <button class="btnAddAccount" id="btnAddAccount" disabled type="submit">Добавить</button>
     </form>
 </section>
 
+<!--<input type="text" data-th-name="id" placeholder="id">-->
+<!--<input type="text" data-th-name="rusName" placeholder="rusName">-->
+
+<!--<select>-->
+<!--<option-->
+<!--        th:each="role : ${listRoles}"-->
+<!--        th:value="${role.id}"-->
+<!--        th:text="${role.id}+ ' ' +${role.rusName}"-->
+<!--        th:attr="data-id=${role.id},data-rusName=${role.rusName}"-->
+<!--&gt;-->
+<!--</option>-->
+<!--</select>-->
+
+<!--<script>-->
+<!--    const $id = document.querySelector('[name=id]');-->
+<!--    const $rusName = document.querySelector('[name=rusName]');-->
+
+<!--    document.querySelector('select').addEventListener(`change`, e => {-->
+<!--        const $option = e.target.options[e.target.selectedIndex];-->
+<!--        $id.value = $option.dataset.id;-->
+<!--        $rusName.value = $option.dataset.rusName;-->
+<!--    });-->
+<!--</script>-->
+
+
 <section class="allAccount">
     <h1 >Список аккаунтов</h1>
 
-    <div class="inputAccount">
+    <div class="inputAccountShow">
         <div class="inputAccountName">Логин</div>
-        <div class="inputAccountName">Пароль</div>
         <div class="inputAccountName">Роль</div>
     </div>
 
     <div th:each="el : ${allUsers}"   class="accounts" >
-        <div class="inputAccount" >
+        <div class="inputAccountShow" >
             <div th:text="${el.username}"></div>
-            <div th:text="${el.password}"></div>
             <div th:each="role : ${el.roles}" th:text="${role.rusName}"></div>
 
         </div>
